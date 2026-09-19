@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bulb Control</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      font-family: Arial, sans-serif;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 30px 25px;
+      width: 340px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .bulb-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      height: 220px;
+    }
+
+    .bulb {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: #374151;
+      box-shadow: inset 0 0 30px rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .bulb::before {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      left: 20px;
+      top: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+
+    .bulb::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 70px;
+      background: #1f2937;
+      left: 53px;
+      top: 115px;
+      border-radius: 10px;
+    }
+
+    .bulb.on {
+      background: #facc15;
+      box-shadow:
+        0 0 20px rgba(250, 204, 21, 0.8),
+        0 0 40px rgba(250, 204, 21, 0.9),
+        0 0 80px rgba(250, 204, 21, 0.8);
+    }
+
+    .status {
+      margin: 10px 0 20px;
+      font-size: 1.2rem;
+      color: #e5e7eb;
+      font-weight: bold;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 22px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    #onBtn {
+      background: #22c55e;
+      color: white;
+      box-shadow: 0 8px 18px rgba(34, 197, 94, 0.35);
+    }
+
+    #offBtn {
+      background: #ef4444;
+      color: white;
+      box-shadow: 0 8px 18px rgba(239, 68, 68, 0.35);
+    }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="bulb-wrap">
+      <div id="bulb" class="bulb"></div>
+    </div>
+
+    <div id="status" class="status">Bulb: OFF</div>
+
+    <div class="buttons">
+      <button id="onBtn">ON</button>
+      <button id="offBtn">OFF</button>
+    </div>
+  </div>
+
+  <script>
+    const bulb = document.getElementById("bulb");
+    const status = document.getElementById("status");
+    const onBtn = document.getElementById("onBtn");
+    const offBtn = document.getElementById("offBtn");
+
+    onBtn.addEventListener("click", () => {
+      bulb.classList.add("on");
+      status.textContent = "Bulb: ON";
+    });
+
+    offBtn.addEventListener("click", () => {
+      bulb.classList.remove("on");
+      status.textContent = "Bulb: OFF";
+    });
+  </script>
+</body>
+</html>
